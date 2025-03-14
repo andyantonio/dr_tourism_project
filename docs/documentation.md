@@ -12,7 +12,7 @@ The primary objective of this project was to develop an interactive dashboard th
 * Tourist visit patterns based on various features, including lodging type, gender, age group, and reason for visit.
 * A six-month forecast for future tourist arrivals.
 
-[Download the Power BI report]( https://github.com/andyantonio/dr_tourism_project/raw/refs/heads/main/Dashboard/DRDashboard.pbix )
+[Download the Power BI report](https://github.com/andyantonio/dr_tourism_project/raw/refs/heads/main/Dashboard/DRDashboard.pbix)
 
 ## Methodology
 

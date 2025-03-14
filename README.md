@@ -4,7 +4,7 @@
 
 The primary objective of this project was to develop an interactive dashboard that visualizes general tourism trends to the Dominican Republic, categorized by the origin country of visitors. This dashboard aims to inform strategic decisions regarding advertising budget allocation and timing.
 
-[Download the Power BI report]( https://github.com/andyantonio/dr_tourism_project/raw/refs/heads/main/Dashboard/DRDashboard.pbix )
+[Download the Power BI report](https://github.com/andyantonio/dr_tourism_project/raw/refs/heads/main/Dashboard/DRDashboard.pbix)
 
 ## Key Features:
 
@@ -34,6 +34,6 @@ The primary objective of this project was to develop an interactive dashboard th
 •	Automated data refresh.
 
 ## Full Documentation:
-•	A [full documentation] (https://github.com/andyantonio/dr_tourism_project/blob/main/docs/documentation.md) of this project is available in the docs folder of this repository.
+•	A [full documentation](https://github.com/andyantonio/dr_tourism_project/blob/main/docs/documentation.md) of this project is available in the docs folder of this repository.
 
 
