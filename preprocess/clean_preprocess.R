@@ -73,13 +73,18 @@ REGION_LISTS <- list(
   other_rest_of_world = c("Other Rest of the World")
 )
 
-# Function to download file from the URL
+# Function to download file from the URL using httr2
 download_file <- function(url, output_filename) {
-  response <- GET(url)
-  if (status_code(response) != 200) {
+  response <- request(url) |>  # Create a request object
+    req_perform()              # Perform the request
+  
+  # Check the HTTP status of the response
+  if (resp_status(response) != 200) {
     stop(paste("File not found:", url))
   }
-  writeBin(content(response, "raw"), output_filename)
+  
+  # Write the raw content of the response to a file
+  writeBin(resp_body_raw(response), output_filename)
   message(paste0("File downloaded to: ", output_filename))
 }
 
@@ -180,10 +185,6 @@ process_DRdata <- function(year) {
     process_sheet(sheet, year, monthNumber, monthUpper, file_name)
   })
   
-  # Save the combined dataframe to a single CSV file
-  output_file <- paste0("dr_tourism_data_", year, ".csv")
-  write.csv(combined_data, output_file, row.names = FALSE)
-  message(paste0("Combined data saved to: ", output_file))
   
   return(combined_data)
 }
@@ -197,11 +198,11 @@ dr_data2025 <- process_DRdata(2025)
 
 
 # Using dplyr::bind_rows()
-library(dplyr)
 DRtourism_data <- bind_rows(dr_data2022,dr_data2023,dr_data2024,dr_data2025)
 print(DRtourism_data)
 
 
 
-write.csv(DRtourism_data, "DRtourism_data.csv", row.names = FALSE)
+write.csv(DRtourism_data, "data/DRtourism_data.csv", row.names = FALSE)
+
 

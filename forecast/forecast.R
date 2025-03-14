@@ -1,9 +1,12 @@
 ## Forecast function
 
 
+library(dplyr)
+library(lubridate)
 library(tsibble)
 library(forecast)
-library(lubridate)
+library(fable)
+library(zoo)
 
 country_forecast <- function(df) {
   unique_countries <- unique(df$Country)
@@ -14,22 +17,22 @@ country_forecast <- function(df) {
     tryCatch({
       #__________________________________________________________________________________
       # Prepare file for forecast
-      ts_table <- df |>
-        filter(Country == c) |>
-        select(Country, Month, Male, Female) |>
-        rename(date = Month) |>
-        mutate(tourists = Male + Female) |>
-        select(-Male, -Female) |>
-        filter(as.Date(date) < as.Date("2025-01-01")) |>
+      ts_table <- df %>%
+        filter(Country == c) %>%
+        select(Country, Month, Male, Female) %>%
+        rename(date = Month) %>%
+        mutate(tourists = Male + Female) %>%
+        select(-Male, -Female) %>%
+        filter(as.Date(date) < as.Date("2025-01-01")) %>%
         select(-Country)
       
       # Group by date and sum the tourists column
-      ts_table <- ts_table |>
-        group_by(date) |>
+      ts_table <- ts_table %>%
+        group_by(date) %>%
         summarise(tourists = sum(tourists, na_rm = TRUE))
       
       ts_table <- ts_table %>%
-        mutate(date = yearmonth(date)) |>
+        mutate(date = yearmonth(date)) %>%
         as_tsibble(index = date)
       
       # Create time series
@@ -93,12 +96,12 @@ country_forecast <- function(df) {
       #_____________________________________________________________________________
       # Prep file
       forecast_df$Country <- c
-      forecast_df <- forecast_df |>
+      forecast_df <- forecast_df %>%
         select(Country, everything())
       
-      total_forecast <- forecast_df |>
-        mutate(Date = Date) |>
-        mutate(TotalVisitors = Predicted) |>
+      total_forecast <- forecast_df %>%
+        mutate(Date = Date) %>%
+        mutate(TotalVisitors = Predicted) %>%
         select(1:3)  # Keep only Country, Date, TotalVisitors
       
       # Store result in the list
@@ -129,11 +132,13 @@ all_forecasts <- all_forecasts$all_forecasts
 
 
 
-all_forecasts <- all_forecasts |> 
+all_forecasts <- all_forecasts %>% 
   mutate(across(where(is.numeric), floor))
 
 
 
-write.csv(all_forecasts, paste0("all_forecasts2025.csv"), row.names = FALSE)
+write.csv(all_forecasts, file = "data/all_forecasts2025.csv", row.names = FALSE)
+
+
 
 
