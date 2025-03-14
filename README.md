@@ -1,8 +1,8 @@
 # dr_tourism_project
-Data Project: Dominican Republic Tourism Trends Dashboard
+# Data Project: Dominican Republic Tourism Trends Dashboard
 
 
-##Goal
+## Goal
 
 The primary objective of this project was to develop an interactive dashboard that visualizes general tourism trends to the Dominican Republic, categorized by the origin country of visitors. This dashboard aims to inform strategic decisions regarding advertising budget allocation and timing. Specifically, it focuses on displaying:
 * Monthly tourism trends for each country within the dataset.
@@ -13,7 +13,9 @@ The primary objective of this project was to develop an interactive dashboard th
 * Tourist visit patterns based on various features, including lodging type, gender, age group, and reason for visit.
 * A six-month forecast for future tourist arrivals.
 
-##Methodology
+[My dashboard]([https://www.example.com](https://app.powerbi.com/groups/me/reports/6ff703d1-1cc9-40be-af86-4f1433dceeb0?ctid=19df09a9-d1f0-4cff-90c4-01385cc40b57&pbi_source=linkShare&bookmarkGuid=b073ad7a-6f03-453f-ac56-9987bc3b0c43))
+
+## Methodology
 
 This project was completed in approximately 25 hours, excluding the time spent on this report. A significant portion of the time was dedicated to learning and implementing time series forecasting models and constructing the interactive dashboard.
 The data source for this project was an Excel report obtained from the Central Bank of the Dominican Republic: https://www.bancentral.gov.do/a/d/2537-sector-turismo.
@@ -37,11 +39,11 @@ The project was divided into three main phases:
 * Integration of predicted values from the selected model.
 
   
-##Detailed Methodology
+## Detailed Methodology
 
 R was used for data cleaning and preprocessing. The code is available on GitHub.
 
-###Data Preparation:
+### Data Preparation:
 
 * File Retrieval: A script was developed to automatically retrieve annual Excel files from the government website. Each file, containing monthly and yearly visitor data categorized by country of origin, age group, lodging type, gender, and reason for visit, was downloaded. Error handling was implemented to address download failures.
 * Data Cleaning and Preprocessing: The complexity of the Excel files required multiple cleaning steps. The files were largely consistent across years, with minor adjustments needed for the 2025 file. Each monthly sheet was extracted into a data frame. Summary level data was kept, and airport specific data was discarded. Unnecessary header and separator rows and columns were removed. Columns were renamed to English. "Other" entries in the country column were renamed to their respective regions. A translation table, generated with the aid of LLMs (ChatGPT), was used to convert country names from Spanish to English. A region column was added based on a predefined list of English region names. Numerical values were rounded down. A date column was created by combining the year and month information.
@@ -53,12 +55,12 @@ Forecasting for the First Half of 2025:
 * Model Testing and Selection: The manual SARIMA model was selected as the final model based on its performance on the first six months of 2025.
 * Forecasting Values for 2025: A function was created to generate forecasts for each country. The function processed each country's data, created a time series object, fit the SARIMA model, and generated a data frame of predicted values for 2025.
 
-###Dashboard Creation:
+### Dashboard Creation:
 
 * Data Connection and Dashboard Construction: Data was loaded into Power BI. The "Month" column was renamed to "Date," and a calendar table was added. Filters were applied to exclude Dominican resident data. Slicers were created for year and region. Charts were generated to display total visitors, year-over-year changes, top countries, monthly trends, and demographic breakdowns. A separate page was created for country-specific data. A YoY detailed page was added to show the highest and lowest growth countries.
 * Integration of Predicted Values from the Selected Model: A page was added to display forecasted values. The page includes a line chart of actual and predicted monthly visitors for the first six months of 2025 and a card showing the percentage difference.
 
-##Shortcomings
+## Shortcomings
 
 * The aggregated nature of the data limited the depth of analysis. Access to individual-level data would have allowed for more robust correlation analysis and market segmentation.
 * Further optimization of the code for automating yearly data merging is possible.
@@ -66,7 +68,7 @@ Forecasting for the First Half of 2025:
 * The function that created the forecast for each country had issues with the country of Scotland, due to all of the values being zero.
 * Confidence intervals are not displayed on the forecast graphs.
 
-##Improvements
+## Improvements
 
 * Merge actual and predicted values into a single plot and add confidence intervals to the forecast page.
 * Include model details and parameters directly in the Power BI report.
