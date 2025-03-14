@@ -52,12 +52,24 @@ R was used for data cleaning and preprocessing. The code is available on GitHub.
 
 * Preparing Data for Time Series Analysis: A time series object was created using aggregated total tourist numbers. Unnecessary columns were removed, and the date column was formatted. The time series object covered the period from 2022 to 2024, with a monthly frequency. January 2025 data was excluded.
 * Exploratory Data Analysis for Model Selection: Stationarity and seasonality were assessed using various plots and the Dickey-Fuller test. The data exhibited an upward trend and seasonality. Differencing indicated that one level of difference was sufficient to remove stationarity and seasonality.
-![A slight upward trend indicates that the data is non stationary](../images/stationarity.png)
 
-![The data for each year has similar peaks and valleys, indicating seasonality](../images/seasonal_plot.png)
+<p align="center">
+  <img src="../images/stationarity.png" width="600" alt="Stationarity plot">
+  <br>
+  <small>A slight upward trend indicates that the data is non stationary</small>
+</p>
 
-![An ACF plot with a high value at lag one indicates that the value for a month is highly correlated with the value of the same month the previous year ](../images/acf_plot.png)
+<p align="center">
+  <img src="../images/seasonal_plot.png" width="600" alt="Seasonality plot">
+  <br>
+  <small>The data for each year has similar peaks and valleys, indicating seasonality</small>
+</p>
 
+<p align="center">
+  <img src="../images/acf_plot.png" width="600" alt="ACF plot">
+  <br>
+  <small>An ACF plot with a high value at lag one indicates that the value for a month is highly correlated with the value of the same month the previous year</small>
+</p>
 
 
 * Model Training with Rolling Window Cross-Validation and Tuning: SARIMA, ETS, and Prophet models were trained using rolling window cross-validation. The RMSE was used to evaluate model performance. A manual SARIMA model with specific parameters yielded the lowest RMSE. 
@@ -76,7 +88,7 @@ seasonality <- 12  # Monthly frequency
 * Model Testing and Selection: The manual SARIMA model was selected as the final model based on its performance on the first six months of 2025.
 
 <p align="center">
-  <img src="../images/manual_sarima.png" width="500" alt="Testing the SARIMA model for the 6 first months of 2025">
+  <img src="../images/manual_sarima.png" width="600" alt="Testing the SARIMA model for the 6 first months of 2025">
   <br>
   <font size="5">Testing the SARIMA model for the 6 first months of 2025</font>
 </p>
