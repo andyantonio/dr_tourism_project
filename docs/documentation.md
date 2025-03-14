@@ -75,7 +75,11 @@ seasonality <- 12  # Monthly frequency
 
 * Model Testing and Selection: The manual SARIMA model was selected as the final model based on its performance on the first six months of 2025.
 
-![Testing the SARIMA model for the 6 first months of 2025](../images/manual_sarima.png)
+<p align="center">
+  <img src="../images/manual_sarima.png" width="500" alt="Testing the SARIMA model for the 6 first months of 2025">
+  <br>
+  <font size="5">Testing the SARIMA model for the 6 first months of 2025</font>
+</p>
 
 * Forecasting Values for 2025: A function was created to generate forecasts for each country. The function processed each country's data, created a time series object, fit the SARIMA model, and generated a data frame of predicted values for 2025.
 
