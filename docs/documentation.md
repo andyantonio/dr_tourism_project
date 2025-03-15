@@ -68,7 +68,7 @@ R was used for data cleaning and preprocessing. The code is available on GitHub.
 <p align="center">
   <img src="../images/acf_plot.png" width="600" alt="ACF plot">
   <br>
-  <small>An ACF plot with a high value at lag one indicates that the value for a month is highly correlated with the value of the same month the previous year</small>
+  <small>An ACF plot with a high value at lag one indicates that the value for a month is correlated with the value of the same month the previous year</small>
 </p>
 
 
