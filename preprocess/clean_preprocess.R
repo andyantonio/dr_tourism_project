@@ -19,7 +19,7 @@ BASE_URL <- "https://cdn.bancentral.gov.do/documents/estadisticas/sector-turismo
 MONTH_LOOKUP <- data.frame(
   Spanish = c("ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO",
               "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"),
-  MonthNumber = sprintf("%02d", 1:12)
+  MonthNumber = sprintf("%02d", 1:12)#assigns a numeric value to each month with two digits, used to form the date
 )
 
 
@@ -73,10 +73,10 @@ REGION_LISTS <- list(
   other_rest_of_world = c("Other Rest of the World")
 )
 
-# Function to download file from the URL using httr2
+# Function to download fil from an URL 
 download_file <- function(url, output_filename) {
-  response <- request(url) |>  # Create a request object
-    req_perform()              # Perform the request
+  response <- request(url) %>%  
+    req_perform()             
   
   # Check the HTTP status of the response
   if (resp_status(response) != 200) {
@@ -122,7 +122,7 @@ process_sheet <- function(sheet, year, monthNumber, monthUpper, output_filename)
     }
   }
   
-  # Translate country names
+  # If country name in the spanish column of the lookup table, switch it for the english name
   data <- data %>%
     mutate(Country = ifelse(Country %in% COUNTRY_LOOKUP$Spanish, 
                             COUNTRY_LOOKUP$English[match(Country, COUNTRY_LOOKUP$Spanish)], 
@@ -161,11 +161,12 @@ process_DRdata <- function(year) {
   
   download_file(file_url, file_name)
   
-  #Filter out any sheet that has the same name of the year to skip the yearly aggregated sheet
+  #Get names of every sheet in the excel file and discard the sheet that only has the Year has the name.
   sheets <- excel_sheets(file_name) %>%
     discard(~ . == as.character(year)) %>%
-    trimws()
+    trimws()#trims trailing whitespaces
   
+  #Creates dataframes with the variables needed to run the cleaning functions.
   sheet_data <- data.frame(SheetName = sheets) %>%
     mutate(
       MonthUpper = map_chr(SheetName, ~ {
@@ -190,19 +191,19 @@ process_DRdata <- function(year) {
 }
 
 
-
+#Creates a dataframe for each year by running the main function
 dr_data2022 <- process_DRdata(2022)
 dr_data2023 <- process_DRdata(2023)
 dr_data2024 <- process_DRdata(2024)
 dr_data2025 <- process_DRdata(2025)
 
 
-# Using dplyr::bind_rows()
+# Combines all the previously created dataframes into one single dataframe
 DRtourism_data <- bind_rows(dr_data2022,dr_data2023,dr_data2024,dr_data2025)
 print(DRtourism_data)
 
 
-
+#Exports the combined dataframe into a csv for use in the dashboard.
 write.csv(DRtourism_data, "data/DRtourism_data.csv", row.names = FALSE)
 
 

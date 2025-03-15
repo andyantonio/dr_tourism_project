@@ -31,11 +31,12 @@ country_forecast <- function(df) {
         group_by(date) %>%
         summarise(tourists = sum(tourists, na_rm = TRUE))
       
+      #Convert the date column to year month and assign it as index for modeling
       ts_table <- ts_table %>%
         mutate(date = yearmonth(date)) %>%
         as_tsibble(index = date)
       
-      # Create time series
+      # Create time series object which is the input for the models
       time_series <- ts(ts_table$tourists, start = c(2022, 1), frequency = 12)
       
       # Ensure time_series has enough data
@@ -44,18 +45,23 @@ country_forecast <- function(df) {
       }
       
       #____________________________________________________________________________
-      # Cross-validation window
+      # Cross-validation window : 
       window_size <- 30
       forecast_horizon <- 6
       step_size <- 6
       
       # SARIMA parameters
+      #p, P for stationarity and seasonality auto regressive order. Uses the previous point or the same point previous period. This model uses the previous point or the same month previous year
+      #d, D for stationarity and seasonality differencing orders. Like p but uses the difference between observations. This model performed better without differencing to capture the underlying pattern
+      #q, Q for moving average order. Like the other two but uses the previous points forecast error. The model performed better by using the error from the same point the previous year
       p <- 1; d <- 0; q <- 0
       P <- 1; D <- 0; Q <- 1
       seasonality <- 12
       
       # Rolling Window Cross-Validation
       model <- NULL  # Ensure model is defined
+      
+      #Training and fitting the rolling window cross validation witht the specified parameters  
       for (i in seq(window_size, length(time_series) - forecast_horizon, by = step_size)) {
         train <- window(time_series, start = time(time_series)[1], end = time(time_series)[i])
         test <- window(time_series, start = time(time_series)[i + 1], end = time(time_series)[i + forecast_horizon])
@@ -66,7 +72,7 @@ country_forecast <- function(df) {
                        method = "ML")
       }
       
-      # Ensure model was trained
+      # IF the model was not trained display this message
       if (is.null(model)) {
         stop("Model training failed.")
       }
@@ -80,6 +86,7 @@ country_forecast <- function(df) {
       
       forecast_dates <- seq(from = first_forecast_date, by = "month", length.out = forecast_horizon)
       
+      #Extract the following information
       final_forecast_result <- forecast(model, h = forecast_horizon)
       final_forecasts <- final_forecast_result$mean
       lower_ci_80 <- final_forecast_result$lower[, 1]
@@ -94,7 +101,7 @@ country_forecast <- function(df) {
       )
       
       #_____________________________________________________________________________
-      # Prep file
+      # Prep file : Adding country, renaming columns, removing confidence intervals for the moment, will be used in a later improvement of the project.
       forecast_df$Country <- c
       forecast_df <- forecast_df %>%
         select(Country, everything())
@@ -121,22 +128,22 @@ country_forecast <- function(df) {
 }
 
 
-
+#Run the function to create the list
 all_forecasts <- country_forecast(DRtourism_data)
 
 
 
-
+#Retrieve the forecasts that succeeded from the list
 all_forecasts <- all_forecasts$all_forecasts
 
 
 
-
+#Rounds down to have similar values to the yearly data set
 all_forecasts <- all_forecasts %>% 
   mutate(across(where(is.numeric), floor))
 
 
-
+#Export to csv for use in the dashboard
 write.csv(all_forecasts, file = "data/all_forecasts2025.csv", row.names = FALSE)
 
 

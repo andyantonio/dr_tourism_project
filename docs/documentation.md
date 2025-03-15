@@ -46,7 +46,7 @@ R was used for data cleaning and preprocessing. The code is available on GitHub.
 
 * File Retrieval: A script was developed to automatically retrieve annual Excel files from the government website. Each file, containing monthly and yearly visitor data categorized by country of origin, age group, lodging type, gender, and reason for visit, was downloaded. Error handling was implemented to address download failures.
 * Data Cleaning and Preprocessing: The complexity of the Excel files required multiple cleaning steps. The files were largely consistent across years, with minor adjustments needed for the 2025 file. Each monthly sheet was extracted into a data frame. Summary level data was kept, and airport specific data was discarded. Unnecessary header and separator rows and columns were removed. Columns were renamed to English. "Other" entries in the country column were renamed to their respective regions. A translation table, generated with the aid of LLMs (ChatGPT), was used to convert country names from Spanish to English. A region column was added based on a predefined list of English region names. Numerical values were rounded down. A date column was created by combining the year and month information.
-* Data Combination and File Generation: A loop was implemented to automate the cleaning process for each monthly sheet. The script was adapted to handle variations in the 2025 file's sheet naming convention. A function was created to retrieve, clean, and combine monthly data for each year, outputting a CSV file. The code was refactored with the assistance of ChatGPT for efficiency and professionalism. Finally, all yearly data was merged into a single CSV file for use in the Power BI dashboard.
+* Data Combination and File Generation: A script was implemented to automate the cleaning process for each monthly sheet. The script was adapted to handle variations in the 2025 file's sheet naming convention. A function was created to retrieve, clean, and combine monthly data for each year, outputting a CSV file. The code was refactored with the assistance of ChatGPT for efficiency and professionalism. Finally, all yearly data was merged into a single CSV file for use in the Power BI dashboard.
 
 ### Forecasting for the First Half of 2025:
 
@@ -93,7 +93,7 @@ seasonality <- 12  # Monthly frequency
   <font size="5">Testing the SARIMA model for the 6 first months of 2025</font>
 </p>
 
-* Forecasting Values for 2025: A function was created to generate forecasts for each country. The function processed each country's data, created a time series object, fit the SARIMA model, and generated a data frame of predicted values for 2025.
+* Forecasting Values for 2025: A function was created to generate forecasts for each country. The function processed each country's data using a loop, created a time series object, fit the SARIMA model, and generated a data frame of predicted values for 2025.
 
 ### Dashboard Creation:
 

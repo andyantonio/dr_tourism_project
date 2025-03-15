@@ -10,7 +10,7 @@ The primary objective of this project was to develop an interactive dashboard th
 
 •	Interactive dashboard displaying monthly tourism trends for each country.
 •	Visualization of year-over-year changes in tourist visits.
-•	Identification of the top countries per region and demographic breakdowns.
+•	Identification of the top countries for visit and year-over-year growth.
 •	Six-month forecast of tourist arrivals using SARIMA time series models.
 
 ## Methodology:
