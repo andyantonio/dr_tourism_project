@@ -15,9 +15,9 @@ The primary objective of this project was to develop an interactive dashboard th
 
 ## Methodology:
 
-•	Data cleaning and preprocessing performed in R, automating the handling of yearly Excel files.
+•	Data cleaning and preprocessing performed in R, automating the retrieval and handling of yearly Excel files.
 •	Time series forecasting implemented using SARIMA models, with model selection based on RMSE.
-•	Dashboard created in Power BI, presenting key insights through interactive visualizations.
+•	Dashboard created in Power BI, presenting key insights on general trends through interactive visualizations.
 
 ## Data Source:
 
@@ -31,7 +31,7 @@ The primary objective of this project was to develop an interactive dashboard th
 
 •	Limitations due to aggregated data; individual-level data would enable more robust analysis.
 •	Potential improvements include adding confidence intervals to forecasts and implementing individual models for each country.
-•	Automated data refresh.
+•	Automated data retrieval and refresh.
 
 ## Full Documentation:
 •	A [full documentation](https://github.com/andyantonio/dr_tourism_project/blob/main/docs/documentation.md) of this project is available in the docs folder of this repository.
