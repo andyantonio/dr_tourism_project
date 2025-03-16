@@ -25,6 +25,7 @@ The project was divided into three main phases:
 * File retrieval.
 * Data cleaning and preprocessing.
 * Data combination and file generation.
+
 2.	Forecasting for the First Half of 2025: 
 * Preparing data for time series analysis.
 * Exploratory data analysis for model selection.
