@@ -102,13 +102,13 @@ seasonality <- 12  # Monthly frequency
 * Integration of Predicted Values from the Selected Model: A page was added to display forecasted values. The page includes a line chart of actual and predicted monthly visitors for the first six months of 2025 and a card showing the percentage difference.
 
 <p align="center">
-  <img src="../images/dashboard_last.png" width="600" alt="View of the dashboard report">
+  <img src="../images/dashboard_last.png" width="1200" alt="View of the dashboard report">
   <br>
   <font size="5">View of the dashboard report</font>
 </p>
 <br>
 <p align="center">
-  <img src="../images/dashboard_forecast.png" width="600" alt="View of the dashboard forecast page">
+  <img src="../images/dashboard_forecast.png" width="1200" alt="View of the dashboard forecast page">
   <br>
   <font size="5">View of the dashboard forecast page</font>
 </p>
