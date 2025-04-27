@@ -101,6 +101,18 @@ seasonality <- 12  # Monthly frequency
 * Data Connection and Dashboard Construction: Data was loaded into Power BI. The "Month" column was renamed to "Date," and a calendar table was added. Filters were applied to exclude Dominican resident data. Slicers were created for year and region. Charts were generated to display total visitors, year-over-year changes, top countries, monthly trends, and demographic breakdowns. A separate page was created for country-specific data. A YoY detailed page was added to show the highest and lowest growth countries.
 * Integration of Predicted Values from the Selected Model: A page was added to display forecasted values. The page includes a line chart of actual and predicted monthly visitors for the first six months of 2025 and a card showing the percentage difference.
 
+<p align="center">
+  <img src="../images/dashboard_last.png" width="600" alt="View of the dashboard report">
+  <br>
+  <font size="5">View of the dashboard report</font>
+</p>
+<br>
+<p align="center">
+  <img src="../images/dashboard_forecast.png" width="600" alt="View of the dashboard forecast page">
+  <br>
+  <font size="5">View of the dashboard forecast page</font>
+</p>
+
 ## Shortcomings
 
 * The aggregated nature of the data limited the depth of analysis. Access to individual-level data would have allowed for more robust correlation analysis and market segmentation.
